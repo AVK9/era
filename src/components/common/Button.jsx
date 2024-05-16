@@ -1,13 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
-
-const rotateAnimation = keyframes`
-    0% {
-transform: rotateZ(0deg)
-    }
-    100% {
-transform: rotateZ(360deg)
-    }
-`;
+import styled, { css } from 'styled-components';
 
 const StyledButton = styled.button`
   border: none;
@@ -40,8 +31,6 @@ const StyledButton = styled.button`
     background: #d84343;
     outline: none;
     box-shadow: ${({ theme }) => theme.shadows.small};
-
-    /* animation: ${rotateAnimation} 2s infinite linear; */
   }
 
   align-self: ${(props) => props.align || 'stretch'};
@@ -51,7 +40,6 @@ const StyledButton = styled.button`
     css`
       border: 1px solid rgba(71, 84, 103, 0.2);
       padding: 16px 32px;
-      width: 145px;
       background-color: ${({ theme }) => theme.colors.inputs};
       color: #101828;
 

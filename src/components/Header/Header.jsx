@@ -33,8 +33,9 @@ export const Header = () => {
           </div>
           <div>
             <Navigation>
-              <StyledLink to="/catalog">Catalog</StyledLink>
-              <StyledLink to="/favorites">Favorites</StyledLink>
+              <StyledLink to="/events">Catalog</StyledLink>
+
+              <StyledLink to="/">Favorite</StyledLink>
             </Navigation>
           </div>
         </Flex>

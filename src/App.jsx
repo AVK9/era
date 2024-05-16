@@ -7,8 +7,13 @@ import { LoaderPercent } from './components/Loader/LoaderPercent';
 
 const ErrorPage = lazy(() => import('pages/ErrorPage/ErrorPage'));
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
-const CatalogPage = lazy(() => import('pages/CatalogPage/CatalogPage'));
-const FavoritesPage = lazy(() => import('pages/FavoritesPage/FavoritesPage'));
+const ParticipantsPage = lazy(() =>
+  import('pages/ParticipantsPage/ParticipantsPage')
+);
+const RegistrationPage = lazy(() =>
+  import('pages/RegistrationPage/RegistrationPage')
+);
+const EventPage = lazy(() => import('pages/EventPage/EventPage.jsx'));
 
 function App() {
   return (
@@ -16,8 +21,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/participants" element={<ParticipantsPage />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/events" element={<EventPage />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>

@@ -4,20 +4,17 @@ import { toast } from 'react-toastify';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FormBox, Name, Slogan, Forma, InputBoxes } from './Form.styled';
 import { Button } from '../common/Button';
-import { Calendar, InputField } from '../../components';
+import { Calendar, Flex, InputField } from '../../components';
 import { useSelector } from 'react-redux';
+import { InputRadio } from '../common/InputRadio';
 
 export const Form = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [comment, setComment] = useState('');
+  const [date, setDate] = useState('');
   const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
-  const [startDate, setStartDate] = useState('');
-  const [showCalendar, setShowCalendar] = useState(false);
-
-  const openCalendar = () => setShowCalendar(true);
-  const closeCalendar = () => setShowCalendar(false);
+  const [dateValid, setDateValid] = useState(false);
 
   const nameRegex = /[а-яА-Яa-zA-Z]{3,}/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,8 +45,7 @@ export const Form = () => {
   const reset = () => {
     setName('');
     setEmail('');
-    setStartDate('');
-    setComment('');
+
     toast.success(
       'Congratulations! Order received. Wait for a letter in the mail with further instructions'
     );
@@ -59,12 +55,10 @@ export const Form = () => {
 
   return (
     <FormBox>
-      <Name>Book your campervan now</Name>
-      <Slogan>Stay connected! We are always ready to help you.</Slogan>
       <Forma onSubmit={handleSubmit}>
         <InputBoxes>
           <InputField
-            label="Name"
+            label="Full name"
             placeholder="Ivan Bereza"
             type="text"
             name="name"
@@ -89,30 +83,40 @@ export const Form = () => {
             }}
             placeholder="ivan@gmail.com"
           />
-
           <InputField
-            label="Booking date"
-            type="text"
-            name="calendar"
-            // as={DatePicker}
-            // dateFormat="dd/MM/yyyy"
-            value={clickDate}
-            // selected={calend}
-            // onChange={(date) => setStartDate(date)}
-            // onChange={openCalendar}
-            icon="calendar"
-            calendar
-            onClick={openCalendar}
+            label="Date of bird"
+            type="date"
+            name="date"
+            value={date}
+            onChange={(e) => {
+              emailRegex.test(e.target.value)
+                ? setDateValid(true)
+                : setDateValid(false);
+              setDate(e.target.value);
+            }}
+            placeholder="ivan@gmail.com"
           />
-          {showCalendar && <Calendar onClose={closeCalendar} />}
-          <InputField
-            label="Comment"
-            type="textarea"
-            name="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            comment
-          />
+          <Slogan>Where did you hear about this event?</Slogan>
+          <Flex gap="20px">
+            <InputRadio
+              label="Social media"
+              type="radio"
+              name="radio"
+              value="Social media"
+            />
+            <InputRadio
+              label="Friends"
+              type="radio"
+              name="radio"
+              value="Friends"
+            />
+            <InputRadio
+              label="Found myself"
+              name="radio"
+              value="Found myself"
+              type="radio"
+            />
+          </Flex>
         </InputBoxes>
         <Button>Send</Button>
       </Forma>

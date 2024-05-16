@@ -14,6 +14,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { timeReduser } from './action/action';
+import { eventsReduser } from './events/eventsSlice';
 
 const persistConfig = {
   key: 'favorites',
@@ -29,6 +30,7 @@ export const store = configureStore({
     filter: filterReduser,
     favorites: persistedReduser,
     time: timeReduser,
+    events: eventsReduser,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

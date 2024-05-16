@@ -4,53 +4,53 @@ import { IconButton } from './IconButton';
 
 const InputBox = styled.div`
   display: flex;
-  flex-direction: column;
-
-  ${(props) =>
-    props.radio &&
-    css`
-      flex-direction: row;
-      align-items: center;
-      align-content: center;
-    `}
+  align-items: center;
+  align-content: center;
+  position: relative;
+  /* background-color: pink; */
 `;
 const Label = styled.label`
-  padding-bottom: 18px;
-
   font-family: var(--font-family);
   font-weight: 400;
-
+  padding-left: 10px;
   font-size: 16px;
   line-height: 125%;
   color: ${(props) => (props.active ? '#101828' : 'rgba(16, 24, 40, 0.6)')};
-
-  ${(props) =>
-    props.radio &&
-    css`
-      padding-bottom: 0px;
-    `}
 `;
 
+// const Input = styled.input.attrs({ type: 'radio' })`
 const Input = styled.input`
-  border-radius: 10px;
-  padding: 18px 18px 18px 18px;
-  width: 400px;
-  height: 56px;
-  background: var(--inputs);
   outline: none;
   border: none;
 
-  width: 300px;
-  background: var(--inputs);
+  height: 18px;
+  width: 18px;
+
+  z-index: 1;
+  opacity: 0;
 `;
 
 const IconBox = styled.div`
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  /* border: 2px solid red; */
+
   position: absolute;
-  right: 16px;
-  top: 16px;
+  top: 50% -9px;
+  left: 0;
+  /* background-color: ${(props) => (props.active ? 'red' : 'transparent')}; */
+  background: ${(props) =>
+    props.active
+      ? 'radial-gradient(circle at center, #ff0000, #ffb7db)'
+      : 'transparent'};
+  border: ${(props) =>
+    props.active
+      ? 'radial-gradient(circle at center, #ff0000, #ffb7db)'
+      : '2px solid red'};
 `;
 
-export const InputField = (props) => {
+export const InputRadio = (props) => {
   const [activeInput, setActiveInput] = useState(null);
   const handleFocus = (inputId) => {
     setActiveInput(inputId);
@@ -60,19 +60,18 @@ export const InputField = (props) => {
     setActiveInput(null);
   };
 
-  const { type, label, inputId, icon, onClick } = props;
+  const { type, label, inputId, icon } = props;
   return (
     <InputBox {...props}>
-      <Label active={activeInput === inputId}>{label}</Label>
       <Input
         {...props}
         onFocus={() => handleFocus(inputId)}
         onBlur={handleBlur}
         type={type}
         required
-        onClick={onClick}
       />
-      <IconBox>
+      <Label active={activeInput === inputId}>{label}</Label>
+      <IconBox active={activeInput === inputId}>
         <IconButton icon={icon} />
       </IconBox>
     </InputBox>
