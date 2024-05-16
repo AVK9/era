@@ -7,14 +7,18 @@ import { Button } from '../common/Button';
 import { Calendar, Flex, InputField } from '../../components';
 import { useSelector } from 'react-redux';
 import { InputRadio } from '../common/InputRadio';
+import { useNavigate } from 'react-router-dom';
 
 export const Form = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
+  const [radio, setRadio] = useState('');
   const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const [dateValid, setDateValid] = useState(false);
+
+  const navigate = useNavigate();
 
   const nameRegex = /[а-яА-Яa-zA-Z]{3,}/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,10 +39,11 @@ export const Form = () => {
       toast.warn('Name must have been 3 charge');
       return;
     } else {
-      const data = { name, email, startDate, comment };
+      const data = { name, email, date, radio };
       console.log(data);
       reset();
-      location.reload();
+      navigate('/events');
+      // location.reload();
     }
   };
 
@@ -103,18 +108,27 @@ export const Form = () => {
               type="radio"
               name="radio"
               value="Social media"
+              onChange={(e) => {
+                setRadio(e.target.value);
+              }}
             />
             <InputRadio
               label="Friends"
               type="radio"
               name="radio"
               value="Friends"
+              onChange={(e) => {
+                setRadio(e.target.value);
+              }}
             />
             <InputRadio
               label="Found myself"
               name="radio"
               value="Found myself"
               type="radio"
+              onChange={(e) => {
+                setRadio(e.target.value);
+              }}
             />
           </Flex>
         </InputBoxes>
