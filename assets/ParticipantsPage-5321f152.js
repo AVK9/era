@@ -1,0 +1,1 @@
+import{j as t,S as e}from"./index-e3d01199.js";import{F as r,T as s}from"./Location.styled-fef53f33.js";const n=()=>t.jsx(e,{children:t.jsx(r,{justify:"center",children:t.jsx(s,{color:"#E44848",children:"“Awesome Event” participants"})})});export{n as default};
