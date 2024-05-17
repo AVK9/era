@@ -6,7 +6,7 @@ const fs = require('fs/promises');
 const path = require('path');
 require('dotenv').config();
 
-const { authRouter, contactsRouter } = require('./routes');
+const { authRouter, contactsRouter, eventRouter } = require('./routes');
 
 const app = express();
 
@@ -21,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+app.use('/userevent', eventRouter);
 app.use('/users', authRouter);
 app.use('/api/contacts', contactsRouter);
 

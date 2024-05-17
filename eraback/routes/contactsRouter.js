@@ -6,7 +6,8 @@ const { isValId, authenticate } = require('../middlewares');
 
 const contactsRouter = express.Router();
 
-contactsRouter.get('/', authenticate, ctrl.getAllContacts);
+contactsRouter.get('/', ctrl.getAllContacts);
+// contactsRouter.get('/', authenticate, ctrl.getAllContacts);
 contactsRouter.get('/:id', authenticate, isValId, ctrl.getOneContact);
 contactsRouter.delete('/:id', authenticate, isValId, ctrl.deleteContact);
 
